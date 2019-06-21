@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ws_client测试</title>
+</head>
+<body>
+<h1>hill ws测试</h1>
+<script>
+    var wsUrl = 'ws://127.0.0.1:8813';
+
+    var websocket = new WebSocket(wsUrl);
+
+    //实例对象onopen属性
+    websocket.onopen = function (evt) {
+        websocket.send('客户端发送消息:hello hill');//客户端发送此消息给服务端
+        console.log("conneted success ");
+    }
+
+    //实例化 onmessage
+
+    websocket.onmessage = function (evt) {
+        console.log("ws-sever-return-data is : " + evt.data);
+    }
+
+    //onclose
+    websocket.onclose=function (evt) {
+        console.log("close");
+    }
+    //onerror
+    websocket.onerror=function (evt,e) {
+        console.log("error:"+evt.data);
+    }
+</script>
+</body>
+</html>
