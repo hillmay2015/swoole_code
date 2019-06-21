@@ -6,6 +6,11 @@
  * Date: 2019/6/20
  * Time: 下午1:25
  */
+
+// nohup php server.php >/Applications/MAMP/htdocs/swoole_code/thinkphp/script/monitor/a.txt
+
+//后台执行 脚本运行
+
 class Server
 {
     const PORT = 8815;
@@ -21,6 +26,7 @@ class Server
             echo date('Y-m-d H:i:s') . 'error' . PHP_EOL;
         } else {
             echo date('Y-m-d H:i:s') . 'success' . PHP_EOL;
+
         }
     }
 

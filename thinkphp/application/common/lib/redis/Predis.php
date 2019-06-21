@@ -29,6 +29,7 @@ class Predis
     {
         $this->redis = new \Redis();
         $result = $this->redis->connect(config('redis.host'), config('redis.port'), config('redis.timeOut'));
+        $this->redis->select(1);//选择1号redis数据库
         if ($result === false) {
             throw new \Exception('redis connect error');
         }
@@ -98,4 +99,12 @@ class Predis
         return $this->redis->sMembers($key);
     }
 
+    /**
+     * @return bool
+     * 清空redis数据库连接
+     */
+    public function flushDB($db)
+    {
+        return $this->redis->flushDB($db);
+    }
 }

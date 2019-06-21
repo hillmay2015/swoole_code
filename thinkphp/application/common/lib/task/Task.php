@@ -42,9 +42,9 @@ class Task
      */
     public function pushLive($data, $serv)
     {
-        $clinets = Predis::getInstance()->sMembers(config('redis.live_game_key'));
+        $clients= Predis::getInstance()->sMembers(config('redis.live_game_key'));
 
-        foreach ($clinets as $fd) {
+        foreach ($clients as $fd) {
             $serv->push($fd, json_encode($data));
         }
     }

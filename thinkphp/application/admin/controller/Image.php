@@ -12,6 +12,7 @@ class Image
 {
     public function index()
     {
+       
         $file = request()->file('file');
         $info = $file->move('upload');
         if ($info) {

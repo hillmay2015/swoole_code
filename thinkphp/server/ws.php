@@ -23,10 +23,11 @@ class Ws
 //                app\common\lib\redis\Predis::getInstance()->sRem(config('redis.live_game_key'), $key);
 //            }
 //        }
+        app\common\lib\redis\Predis::getInstance()->flushDB(1);//每次重启时 清空redis数据库
 
         $this->ws = new swoole_websocket_server (self::HOST, self::PORT);
 
-        $this->ws->listen(self::HOST, self::CHART_PORT, SWOOLE_SOCK_TCP);
+        // $this->ws->listen(self::HOST, self::CHART_PORT, SWOOLE_SOCK_TCP);
 
         $this->ws->set([
             'enable_static_handler' => true,
@@ -55,7 +56,7 @@ class Ws
     {
         // var_dump($request->fd);
         // print_r($ws);
-//        echo  $request->fd;
+        echo 'ID:' . $request->fd . PHP_EOL;
         $_POST['http_server'] = $ws;
         //fd放到redis里面去
         app\common\lib\redis\Predis::getInstance()->sAdd(config('redis.live_game_key'), $request->fd);
@@ -67,6 +68,7 @@ class Ws
      */
     public function onWorkerStart($server, $worker_id)
     {
+
         //定义应用目录
         define('APP_PATH', __DIR__ . '/../application/');
         // 加载框架引导文件
